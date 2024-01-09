@@ -1,0 +1,26 @@
+server:
+  port: 58080
+  servlet:
+    context-path: /api
+
+spring:
+  application:
+    name: miss
+  profiles:
+    active: dev
+  servlet:
+    multipart:
+      max-file-size: 1000MB
+      max-request-size: 1000MB
+  datasource:
+    url: jdbc:sqlite:C:/code/sqlite/mms.db
+    driver-class-name: org.sqlite.JDBC
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+mms:
+  music:
+    root-path: "F:/music"
+    tmp-path: "F:/tmp"

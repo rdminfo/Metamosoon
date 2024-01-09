@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rdminfo.mms.common.mapper.MmsMusicMapper">
+
+    <resultMap id="underFolderListResultMap" type="com.rdminfo.mms.common.pojo.vo.MusicAsListItemVO">
+        <result property="cover" column="cover" />
+    </resultMap>
+
+    <select id="selectUnderFolderList" resultMap="underFolderListResultMap">
+        SELECT mf.id AS fileId, mf.type AS type, mf.name AS fileName, mf.size AS size,
+        <if test='queryParam.musicQueryColumns != null and queryParam.musicQueryColumns.size() > 0'>
+            <foreach collection="queryParam.musicQueryColumns" item="item" separator=",">
+                mm.${item.columnName} AS ${item.columnAlias}
+            </foreach>
+        </if>
+        FROM mms_files mf LEFT JOIN mms_music mm ON mm.file_id = mf.id
+        WHERE 1 = 1
+        <if test='folderId == 0'>
+            AND mf.level = 1
+        </if>
+        <if test='folderId != 0'>
+            AND mf.pid = #{folderId}
+        </if>
+        <if test='queryParam.fileType == "default"'>
+            AND (mf.type = 'folder' OR mf.type IN ('mp3', 'wav', 'flac', 'acc', 'ogg', 'aiff'))
+        </if>
+        <if test='queryParam.fileType == "onlyFolder"'>
+            AND mf.type = 'folder'
+        </if>
+        <if test='queryParam.fileType == "onlyMusic"'>
+            AND mf.type IN ('mp3', 'wav', 'flac', 'acc', 'ogg', 'aiff')
+        </if>
+        <if test='queryParam.organized != null and queryParam.organized == "organized"'>
+            AND mm.organized = 1
+        </if>
+        <if test='queryParam.organized != null and queryParam.organized == "disorganized"'>
+            AND mm.organized = 0
+        </if>
+        <if test='queryParam.hasAlbum != null and queryParam.hasAlbum == "yes"'>
+            AND (mm.album IS NOT NULL AND mm.album != '')
+        </if>
+        <if test='queryParam.hasAlbum != null and queryParam.hasAlbum == "no"'>
+            AND (mm.album IS NULL OR mm.album = '')
+        </if>
+        <if test='queryParam.hasCover != null and queryParam.hasCover == "yes"'>
+            AND (mm.cover IS NOT NULL AND LENGTH(mm.cover) > 0)
+        </if>
+        <if test='queryParam.hasCover != null and queryParam.hasCover == "no"'>
+            AND (mm.cover IS NULL OR LENGTH(mm.cover) = 0)
+        </if>
+        <if test='queryParam.hasLyric != null and queryParam.hasLyric == "yes"'>
+            AND (mm.lyrics IS NOT NULL AND mm.lyrics != '')
+        </if>
+        <if test='queryParam.hasLyric != null and queryParam.hasLyric == "no"'>
+            AND (mm.lyrics IS NULL OR mm.lyrics = '')
+        </if>
+        <if test='queryParam.hasYear != null and queryParam.hasYear == "yes"'>
+            AND (mm.year IS NOT NULL AND mm.year != '')
+        </if>
+        <if test='queryParam.hasYear != null and queryParam.hasYear == "no"'>
+            AND (mm.year IS NULL OR mm.year = '')
+        </if>
+        <if test='queryParam.artist != null and queryParam.artist != ""'>
+            AND mm.artist = #{queryParam.artist}
+        </if>
+        <if test='queryParam.album != null and queryParam.album != ""'>
+            AND mm.album = #{queryParam.album}
+        </if>
+        <if test='queryParam.year != null and queryParam.year != ""'>
+            AND mm.year = #{queryParam.year}
+        </if>
+        ORDER BY mf.type_sort
+        <trim prefix="," suffixOverrides=",">
+            <if test='queryParam.fileSortColumn != null and queryParam.fileSortColumn != ""'>
+                ${queryParam.fileSortColumn} ${queryParam.sort},
+            </if>
+            <if test='(queryParam.musicSortColumn == null and queryParam.musicSortColumn != "")
+                        and (queryParam.fileSortColumn == null or queryParam.fileSortColumn == "")'>
+                mf.last_modified ${queryParam.sort},
+            </if>
+            <if test='queryParam.musicSortColumn != null and queryParam.musicSortColumn != ""'>
+                ${queryParam.musicSortColumn} ${queryParam.sort},
+            </if>
+        </trim>
+    </select>
+</mapper>
