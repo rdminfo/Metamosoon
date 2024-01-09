@@ -1,0 +1,64 @@
+.list-outer {
+  max-height: 300px;
+  overflow-y: auto;
+}
+.list-item {
+  padding: 4px 12px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  &:hover {
+    background: var(--color-fill-2);
+  }
+
+  &-icon {
+    display: flex;
+    align-items: center;
+    & svg {
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  &-name {
+    font-size: 13px;
+    margin-left: 6px;
+    color: var(--color-text-1);
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    max-width: 100%;
+  }
+
+  &-active {
+    & div svg {
+      color: rgb(var(--primary-6));
+    }
+    & span {
+      font-weight: bold;
+    }
+  }
+}
+
+.list-empty {
+  width: 140px;
+  height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &-icon {
+    & svg {
+      width: 60px;
+      height: 60px;
+    }
+  }
+
+  &-text {
+    color: var(--color-text-4);
+  }
+}

@@ -1,0 +1,42 @@
+.navigation {
+  width: 280px;
+
+  & > div {
+    padding-right: 0 !important;
+  }
+}
+
+.navigation-nav {
+  padding-right: 20px;
+}
+
+.tree-outer {
+  margin-top: 10px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.tree {
+  &-node {
+    &-wrapper {
+      display: flex;
+      align-items: center;
+    }
+
+    &-span {
+      display: block;
+      max-width: 175px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-left: 3px;
+      font-size: 13px;
+    }
+
+    &-span-hover:hover span {
+      & span {
+        max-width: 100%;
+      }
+    }
+  }
+}

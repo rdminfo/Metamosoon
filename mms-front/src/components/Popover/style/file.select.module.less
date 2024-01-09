@@ -1,0 +1,42 @@
+.popover-outer {
+  &-top {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+  }
+  & > div:first-child {
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 400px;
+    padding: 12px 10px 12px 12px;
+  }
+}
+
+.select-list-item {
+  &-outer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  & > div {
+    display: flex;
+    align-items: center;
+  }
+  & > div svg {
+    width: 20px;
+    height: 20px;
+  }
+  & > div:first-child {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  & span {
+    width: 240px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+  }
+}

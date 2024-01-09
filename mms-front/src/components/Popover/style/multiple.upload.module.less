@@ -1,0 +1,85 @@
+.multiple-upload-popover{
+  min-width: 340px;
+  padding: 10px 0;
+}
+
+.upload-list-outer {
+  display: initial;
+}
+
+.upload-list-top {
+  padding: 0 6px 0 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 24px;
+
+  &-left {
+    display: flex;
+    &-text {
+      font-size: 13px;
+      cursor: pointer;
+      max-width: 100px;
+    }
+  }
+
+  &-right {
+    & button {
+      padding: 0 6px;
+    }
+  }
+
+}
+
+.upload-list-item-outer {
+  max-height: 400px;
+  overflow-y: auto;
+  padding: 0 12px;
+}
+
+.upload-list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 2px 0;
+
+  &-left {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+
+    & div {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &:first-child {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        & svg {
+          width: 20px;
+          height: 20px;
+        }
+      }
+    }
+
+    &-text {
+      font-size: 12px;
+      max-width: 180px;
+      margin-top: 0 !important;
+      margin-bottom: 0 !important;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      display: inline-block;
+    }
+  }
+
+  &-right {
+    & button {
+      padding: 0 6px;
+    }
+  }
+}

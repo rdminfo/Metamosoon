@@ -1,0 +1,64 @@
+.review {
+  & > div {
+    padding-right: 0 !important;
+  }
+}
+
+.review-nav {
+  padding-right: 20px;
+
+  &-btn {
+    margin-left: 10px;
+  }
+}
+
+.form-outer {
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 100%;
+  padding-right: 20px;
+  padding-top: 16px;
+}
+
+.form {
+}
+
+.form-item {
+  color: #1d2129;
+  margin-bottom: 12px;
+
+  & > div:first-child {
+    cursor: pointer;
+
+    & label {
+      cursor: pointer;
+    }
+
+    & label:hover {
+      color: rgb(var(--arcoblue-5));
+    }
+  }
+
+  & > div:nth-child(2) {
+    cursor: pointer;
+  }
+
+  &-image {
+    &-btn {
+      height: 32px;
+      width: 32px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: unset;
+      background: unset;
+      color: inherit;
+      cursor: pointer;
+      border-radius: 50%;
+    }
+
+    &-btn:focus-visible {
+      box-shadow: 0 0 0 2px var(--color-primary-light-3);
+    }
+  }
+}
